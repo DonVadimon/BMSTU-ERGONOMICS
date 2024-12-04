@@ -180,7 +180,7 @@ const productionConfig: Configuration = mergeWithRules({
     },
     optimization: {
         minimize: true,
-        runtimeChunk: 'single',
+        runtimeChunk: false,
         minimizer: [
             new TerserPlugin({
                 parallel: true,
@@ -192,6 +192,7 @@ const productionConfig: Configuration = mergeWithRules({
                         comments: false,
                     },
                 },
+                extractComments: false,
             }),
             new CssMinimizerPlugin(),
         ],

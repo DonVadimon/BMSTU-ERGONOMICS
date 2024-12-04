@@ -12,6 +12,7 @@ import postcss from 'rollup-plugin-postcss';
 import nodePolyfills from 'rollup-plugin-polyfill-node';
 import dotenvPlugin from 'rollup-plugin-dotenv';
 import devServer from 'rollup-plugin-dev';
+import bundleSize from '@atomico/rollup-plugin-sizes';
 import dotenv from 'dotenv';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -76,6 +77,7 @@ export default {
         makeHtmlPlugin(),
         isDev ? [] : [terser()],
         devServer({ dirname: resolveOut(), host: '127.0.0.1', port: process.env.PORT || 8000 }),
+        isDev ? [] : [bundleSize()],
     ].flat(),
     watch: {
         exclude: 'node_modules/**',
