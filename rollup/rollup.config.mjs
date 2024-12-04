@@ -50,6 +50,17 @@ function makeHtmlPlugin() {
     });
 }
 
+function makeTerserPlugin() {
+    return terser({
+        compress: {
+            drop_console: true,
+        },
+        output: {
+            comments: false,
+        },
+    });
+}
+
 export default {
     input: 'src/index.tsx',
     output: {
@@ -75,7 +86,7 @@ export default {
             minimize: !isDev,
         }),
         makeHtmlPlugin(),
-        isDev ? [] : [terser()],
+        isDev ? [] : [makeTerserPlugin()],
         devServer({ dirname: resolveOut(), host: '127.0.0.1', port: process.env.PORT || 8000 }),
         isDev ? [] : [bundleSize()],
     ].flat(),
