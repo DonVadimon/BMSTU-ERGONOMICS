@@ -71,6 +71,7 @@ export default {
         dotenvPlugin(),
         postcss({
             extract: !isDev,
+            minimize: !isDev,
         }),
         makeHtmlPlugin(),
         isDev ? [] : [terser()],
