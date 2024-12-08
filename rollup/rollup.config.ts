@@ -1,6 +1,5 @@
 import path from 'path';
 import fs from 'fs';
-import { fileURLToPath } from 'url';
 
 import nodeResolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
@@ -10,13 +9,14 @@ import terser from '@rollup/plugin-terser';
 import html, { makeHtmlAttributes } from '@rollup/plugin-html';
 import postcss from 'rollup-plugin-postcss';
 import nodePolyfills from 'rollup-plugin-polyfill-node';
-import dotenvPlugin from 'rollup-plugin-dotenv';
+import _dotenvPlugin from 'rollup-plugin-dotenv';
 import devServer from 'rollup-plugin-dev';
 import bundleSize from '@atomico/rollup-plugin-sizes';
 import dotenv from 'dotenv';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const dotenvPlugin =
+    typeof _dotenvPlugin === 'function' ? _dotenvPlugin : ((_dotenvPlugin as any).default as typeof _dotenvPlugin);
+
 const resolveRoot = (...paths) => path.resolve(__dirname, ...paths);
 const resolveOut = (...paths) => resolveRoot('.build', ...paths);
 
@@ -87,8 +87,10 @@ export default {
         }),
         makeHtmlPlugin(),
         isDev ? [] : [makeTerserPlugin()],
-        devServer({ dirname: resolveOut(), host: '127.0.0.1', port: process.env.PORT || 8000 }),
-        isDev ? [] : [bundleSize()],
+        process.env.RLP_SERVE
+            ? devServer({ dirname: resolveOut(), host: '127.0.0.1', port: Number(process.env.PORT || 8000) })
+            : [],
+        isDev ? [] : bundleSize(),
     ].flat(),
     watch: {
         exclude: 'node_modules/**',
