@@ -17,6 +17,9 @@ start-wp: # start webpack
 sm-build-wp: sm-log # spead measure webpack build
 	cd webpack && eval 'npm run sm -- --repeat=$$SM_REPEAT'
 
+sm-watch-wp: sm-log # spead measure webpack watch
+	cd webpack && eval 'npm run sm -- --repeat=$$SM_REPEAT --watch'
+
 build-rp: # build rollup
 	cd rollup && npm run build
 
@@ -26,6 +29,9 @@ start-rp: # start rollup
 sm-build-rp: sm-log # spead measure rollup build
 	cd rollup && eval 'npm run sm -- --repeat=$$SM_REPEAT'
 
+sm-watch-rp: sm-log # spead measure rollup watch
+	cd rollup && eval 'npm run sm -- --repeat=$$SM_REPEAT --watch'
+
 build-pl: # build parcel
 	cd parcel && npm run build
 
@@ -34,3 +40,6 @@ start-pl: # start parcel
 
 sm-build-pl: sm-log # spead measure parcel build
 	cd parcel && eval 'npm run sm -- --repeat=$$SM_REPEAT'
+
+sm-watch-pl: sm-log # spead measure parcel watch
+	cd parcel && eval 'npm run sm -- --repeat=$$SM_REPEAT --watch'
