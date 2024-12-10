@@ -62,7 +62,7 @@
   "scripts": {
     "json-server": "json-server --watch items.json",
     "start": "NODE_ENV=development RLP_SERVE=1  rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript --bundleConfigAsCjs --watch",
-    "build": "rm -rf .build && NODE_ENV=production rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript --bundleConfigAsCjs",
+    "build": "rm -rf .build && NODE_ENV=production RLP_SIZE=1 rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript --bundleConfigAsCjs",
     "sm": "ts-node spead-measure.ts"
   },
   "browserslist": {

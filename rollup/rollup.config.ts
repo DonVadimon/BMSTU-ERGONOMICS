@@ -92,7 +92,7 @@ export default {
         process.env.RLP_SERVE
             ? devServer({ dirname: resolveOut(), host: '127.0.0.1', port: Number(process.env.PORT || 8000) })
             : [],
-        isDev ? [] : bundleSize(),
+        isDev || !process.env.RLP_SIZE ? [] : bundleSize(),
     ].flat(),
     watch: {
         exclude: 'node_modules/**',
