@@ -1,6 +1,9 @@
 import webpack from 'webpack';
 
-import { env, git, log, run } from '../measure/utils';
+import { run } from '../measure/run';
+import { env } from '../measure/env';
+import { log } from '../measure/log';
+import { git } from '../measure/git';
 
 env.setEnvVars();
 
@@ -17,7 +20,7 @@ const onBuild = (error: any, stats: webpack.Stats | undefined, run: number) => {
         throw new Error('Starts are undefined');
     }
 
-    log.writeLog({
+    log.addRunLog({
         run,
         build: stats.endTime - stats.startTime,
     });

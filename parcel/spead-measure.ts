@@ -1,18 +1,21 @@
 import { Parcel } from '@parcel/core';
 
-import { env, git, log, run } from '../measure/utils';
+import { run } from '../measure/run';
+import { env } from '../measure/env';
+import { log } from '../measure/log';
+import { git } from '../measure/git';
 
 const bundler = new Parcel({
     entries: 'public/index.html',
     defaultConfig: '@parcel/config-default',
-    defaultTargetOptions: { distDir: '.build' },
+    defaultTargetOptions: { distDir: '.build', sourceMaps: false },
     mode: env.argv.watch ? 'development' : 'production',
 });
 
 const measureBuild = async () => {
     for (let index = 0; index < env.argv.repeat; index++) {
         const { buildTime } = await bundler.run();
-        log.writeLog({
+        log.addRunLog({
             run: index + 1,
             build: buildTime,
         });
@@ -29,7 +32,7 @@ const measureWatch = () => {
             }
 
             if (event?.type === 'buildSuccess') {
-                log.writeLog({
+                log.addRunLog({
                     run: ++run,
                     build: event.buildTime,
                 });

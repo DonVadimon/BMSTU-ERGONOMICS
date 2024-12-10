@@ -1,6 +1,9 @@
 import rollup from 'rollup';
 
-import { env, git, log, run } from '../measure/utils';
+import { run } from '../measure/run';
+import { env } from '../measure/env';
+import { log } from '../measure/log';
+import { git } from '../measure/git';
 
 env.setEnvVars();
 
@@ -11,9 +14,10 @@ const cfg = { ..._cfg, cache: false, logLevel: 'silent' } as rollup.RollupOption
 const measureBuild = async () => {
     for (let index = 0; index < env.argv.repeat; index++) {
         const startTime = Date.now();
-        await rollup.rollup(cfg);
+        const bundle = await rollup.rollup(cfg);
+        await bundle.write(cfg.output as rollup.OutputOptions);
         const endTime = Date.now();
-        log.writeLog({
+        log.addRunLog({
             run: index + 1,
             build: endTime - startTime,
         });
@@ -35,7 +39,7 @@ const measureWatch = () => {
 
             if (event.code === 'END') {
                 endTime = Date.now();
-                log.writeLog({
+                log.addRunLog({
                     run: ++run,
                     build: endTime - startTime,
                 });

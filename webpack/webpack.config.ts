@@ -71,8 +71,8 @@ const commonConfig: Configuration = {
             },
         }),
         new MiniCssExtractPlugin({
-            filename: 'css/[name].[contenthash].css',
-            chunkFilename: 'css/[name].[contenthash].css',
+            filename: '[name].[contenthash].css',
+            chunkFilename: '[name].[contenthash].css',
         }),
     ],
     module: {
@@ -146,7 +146,8 @@ const developmentConfig = merge(commonConfig, {
         publicPath: getPublicPath(),
     },
     optimization: {
-        runtimeChunk: 'single',
+        minimize: false,
+        runtimeChunk: false,
     },
     devServer: {
         port: process.env.PORT || 8000,
@@ -175,8 +176,8 @@ const productionConfig: Configuration = mergeWithRules({
     output: {
         path: resolveOut(),
         publicPath: getPublicPath(),
-        filename: 'js/[name].[contenthash].js',
-        sourceMapFilename: 'js/[name].[contenthash].js.map',
+        filename: '[name].[contenthash].js',
+        sourceMapFilename: '[name].[contenthash].js.map',
     },
     optimization: {
         minimize: true,

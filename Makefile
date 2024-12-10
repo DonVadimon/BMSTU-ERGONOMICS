@@ -43,3 +43,16 @@ sm-build-pl: sm-log # spead measure parcel build
 
 sm-watch-pl: sm-log # spead measure parcel watch
 	cd parcel && eval 'npm run sm -- --repeat=$$SM_REPEAT --watch'
+
+sm-build-all: sm-build-wp sm-build-rp sm-build-pl
+	echo "🛠 build done"
+
+sm-watch-all: sm-watch-wp sm-watch-rp sm-watch-pl
+	echo "👀 watch done"
+
+sm-all: sm-build-all sm-watch-all
+	echo "🚀 done"
+
+clear-out:
+	rm -rf ./*/.build
+	rm -rf ./*/.logs

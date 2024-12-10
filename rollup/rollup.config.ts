@@ -11,6 +11,7 @@ import postcss from 'rollup-plugin-postcss';
 import nodePolyfills from 'rollup-plugin-polyfill-node';
 import _dotenvPlugin from 'rollup-plugin-dotenv';
 import devServer from 'rollup-plugin-dev';
+import copy from 'rollup-plugin-copy';
 import bundleSize from '@atomico/rollup-plugin-sizes';
 import dotenv from 'dotenv';
 
@@ -82,10 +83,11 @@ export default {
         }),
         dotenvPlugin(),
         postcss({
-            extract: !isDev,
+            extract: true,
             minimize: !isDev,
         }),
         makeHtmlPlugin(),
+        copy({ ignore: ['*.html'], targets: [{ src: resolveRoot('public', '*'), dest: resolveOut() }] }),
         isDev ? [] : [makeTerserPlugin()],
         process.env.RLP_SERVE
             ? devServer({ dirname: resolveOut(), host: '127.0.0.1', port: Number(process.env.PORT || 8000) })
@@ -94,5 +96,6 @@ export default {
     ].flat(),
     watch: {
         exclude: 'node_modules/**',
+        skipWrite: false,
     },
 };
