@@ -9,7 +9,6 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import { Configuration } from 'webpack';
 import { CustomizeRule, merge, mergeWithRules } from 'webpack-merge';
-import pkgJson from './package.json';
 
 const resolveRoot = (...paths: string[]) => path.resolve(__dirname, ...paths);
 const resolveOut = (...paths: string[]) => resolveRoot('.build', ...paths);
@@ -40,6 +39,13 @@ const cssLoaders = [
 
 const sassLoader = {
     loader: 'sass-loader',
+};
+
+const babelLoader = {
+    loader: 'babel-loader',
+    options: {
+        presets: [['@babel/preset-env']],
+    },
 };
 
 const commonConfig: Configuration = {
@@ -86,17 +92,12 @@ const commonConfig: Configuration = {
                 use: [...cssLoaders, sassLoader],
             },
             {
-                test: /\.ts(x?)?$/,
-                use: [
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            targets: pkgJson.browserslist[NODE_ENV],
-                            presets: [['@babel/preset-env']],
-                        },
-                    },
-                    'ts-loader',
-                ],
+                test: /\.tsx?$/,
+                use: [babelLoader, 'ts-loader'],
+            },
+            {
+                test: /\.jsx?$/,
+                use: [babelLoader],
             },
             {
                 test: /\.svg$/,

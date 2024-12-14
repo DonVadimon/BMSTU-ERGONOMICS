@@ -3,7 +3,7 @@ import fs from 'fs';
 
 import nodeResolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import babel from '@rollup/plugin-babel';
+import { getBabelOutputPlugin } from '@rollup/plugin-babel';
 import typescript from '@rollup/plugin-typescript';
 import terser from '@rollup/plugin-terser';
 import html, { makeHtmlAttributes } from '@rollup/plugin-html';
@@ -75,11 +75,9 @@ export default {
         }),
         nodePolyfills({ sourceMap: false }),
         typescript({ tsconfig: './tsconfig.json' }),
-        babel({
-            babelHelpers: 'bundled',
-            presets: ['@babel/preset-env'],
-            extensions: ['.js', '.jsx', '.ts', '.tsx'],
-            exclude: 'node_modules/**',
+        getBabelOutputPlugin({
+            allowAllFormats: true,
+            presets: [['@babel/preset-env']],
         }),
         dotenvPlugin(),
         postcss({
