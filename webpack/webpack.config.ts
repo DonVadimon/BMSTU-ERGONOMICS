@@ -10,6 +10,8 @@ import TerserPlugin from 'terser-webpack-plugin';
 import { Configuration } from 'webpack';
 import { CustomizeRule, merge, mergeWithRules } from 'webpack-merge';
 
+import pkg from './package.json';
+
 const resolveRoot = (...paths: string[]) => path.resolve(__dirname, ...paths);
 const resolveOut = (...paths: string[]) => resolveRoot('.build', ...paths);
 
@@ -45,6 +47,7 @@ const babelLoader = {
     loader: 'babel-loader',
     options: {
         presets: [['@babel/preset-env']],
+        targets: pkg.browserslist[NODE_ENV],
     },
 };
 
@@ -94,10 +97,12 @@ const commonConfig: Configuration = {
             {
                 test: /\.tsx?$/,
                 use: [babelLoader, 'ts-loader'],
+                exclude: /node_modules/,
             },
             {
                 test: /\.jsx?$/,
                 use: [babelLoader],
+                exclude: /node_modules/,
             },
             {
                 test: /\.svg$/,

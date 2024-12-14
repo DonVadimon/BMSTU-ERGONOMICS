@@ -53,6 +53,10 @@ const writeLogToDisk = () => {
 
     const meanBundleSpeed = env.BUNDLED_MODULES / meanTime;
 
+    const cfgLines = env.paths.CFG
+        ? fs.readFileSync(env.paths.CFG, { encoding: 'utf-8' }).split('\n').filter(Boolean).length
+        : env.CFG_OR_LINES;
+
     const content = [
         '--- RUNS ---',
         ...rows,
@@ -65,6 +69,8 @@ const writeLogToDisk = () => {
         `- Assets size: ${LOGS.bundleSize.assets} bytes`,
         '\n--- BUNDLE SPEED ---',
         `- ${meanBundleSpeed} modules/ms`,
+        '\n--- CFG LINES ---',
+        `- ${cfgLines} config lines`,
     ].join('\n');
 
     console.log(`\x1b[42m ${env.paths.CWD_BASE} \x1b[0m`);

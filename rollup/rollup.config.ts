@@ -8,7 +8,6 @@ import typescript from '@rollup/plugin-typescript';
 import terser from '@rollup/plugin-terser';
 import html, { makeHtmlAttributes } from '@rollup/plugin-html';
 import postcss from 'rollup-plugin-postcss';
-import nodePolyfills from 'rollup-plugin-polyfill-node';
 import _dotenvPlugin from 'rollup-plugin-dotenv';
 import devServer from 'rollup-plugin-dev';
 import copy from 'rollup-plugin-copy';
@@ -71,9 +70,10 @@ export default {
     plugins: [
         commonjs(),
         nodeResolve({
+            browser: true,
+            preferBuiltins: true,
             extensions: ['.js', '.jsx', '.ts', '.tsx'],
         }),
-        nodePolyfills({ sourceMap: false }),
         typescript({ tsconfig: './tsconfig.json' }),
         getBabelOutputPlugin({
             allowAllFormats: true,

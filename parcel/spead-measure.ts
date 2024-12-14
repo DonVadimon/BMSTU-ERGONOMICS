@@ -14,8 +14,12 @@ fs.rmSync(path.resolve(env.paths.CWD, '.parcel-cache'), { recursive: true, force
 const bundler = new Parcel({
     entries: 'public/index.html',
     defaultConfig: '@parcel/config-default',
-    defaultTargetOptions: { distDir: '.build', sourceMaps: false },
-    mode: env.argv.watch ? 'development' : 'production',
+    defaultTargetOptions: {
+        distDir: '.build',
+        sourceMaps: false,
+        isLibrary: false,
+    },
+    mode: env.mode,
 });
 
 const measureBuild = async () => {
