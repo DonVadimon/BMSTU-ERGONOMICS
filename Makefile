@@ -56,3 +56,4 @@ sm-all: sm-build-all sm-watch-all
 clear-out:
 	rm -rf ./*/.build
 	rm -rf ./*/.logs
+	rm -rf ./*/.parcel-cache

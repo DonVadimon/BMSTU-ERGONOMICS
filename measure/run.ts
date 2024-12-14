@@ -17,7 +17,16 @@ const setupMeasure =
             await measureBuild();
         }
 
-        log.addBundleSizeLog(dirSizeSync(env.paths.BUILD_DIR));
+        const allSize = dirSizeSync(env.paths.BUILD_DIR);
+        const jsSize = dirSizeSync(env.paths.BUILD_DIR, /\.js$/);
+        const cssSize = dirSizeSync(env.paths.BUILD_DIR, /\.css$/);
+        const assetsSize = allSize - jsSize - cssSize;
+        log.addBundleSizeLog({
+            all: allSize,
+            assets: assetsSize,
+            css: cssSize,
+            js: jsSize,
+        });
         log.writeLogToDisk();
         return process.exit(0);
     };

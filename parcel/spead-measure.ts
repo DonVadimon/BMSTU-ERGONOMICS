@@ -1,9 +1,15 @@
+import fs from 'fs';
+import path from 'path';
+
 import { Parcel } from '@parcel/core';
 
 import { run } from '../measure/run';
 import { env } from '../measure/env';
 import { log } from '../measure/log';
 import { git } from '../measure/git';
+
+// Удяляем кэш
+fs.rmSync(path.resolve(env.paths.CWD, '.parcel-cache'), { recursive: true, force: true });
 
 const bundler = new Parcel({
     entries: 'public/index.html',

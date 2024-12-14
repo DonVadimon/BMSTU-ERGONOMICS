@@ -14,6 +14,7 @@ const setEnvVars = () => {
 };
 
 const CWD = process.cwd();
+const CWD_BASE = path.basename(CWD);
 const LOGS_DIR = path.resolve(CWD, '.logs');
 const LOG_FILE = path.resolve(LOGS_DIR, argv.watch ? '.watch-time.log' : '.build-time.log');
 const SRC_FILE = path.resolve(CWD, 'src', 'index.tsx');
@@ -25,6 +26,7 @@ export const env = {
     setEnvVars,
     paths: {
         CWD,
+        CWD_BASE,
         LOGS_DIR,
         LOG_FILE,
         SRC_FILE,
