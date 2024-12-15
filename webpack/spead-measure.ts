@@ -4,6 +4,7 @@ import { run } from '../measure/run';
 import { env } from '../measure/env';
 import { log } from '../measure/log';
 import { git } from '../measure/git';
+import { measureDevServer } from '../measure/measure-dev-server';
 
 env.setEnvVars();
 
@@ -52,4 +53,4 @@ const measureWatch = () => {
     });
 };
 
-run.setupMeasure({ measureBuild, measureWatch })();
+run.setupMeasure({ measureBuild, measureWatch, measureDevServer })();

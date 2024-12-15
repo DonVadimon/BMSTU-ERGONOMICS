@@ -7,6 +7,7 @@ import { run } from '../measure/run';
 import { env } from '../measure/env';
 import { log } from '../measure/log';
 import { git } from '../measure/git';
+import { measureDevServer } from '../measure/measure-dev-server';
 
 // Удяляем кэш
 fs.rmSync(path.resolve(env.paths.CWD, '.parcel-cache'), { recursive: true, force: true });
@@ -57,4 +58,4 @@ const measureWatch = () => {
     });
 };
 
-run.setupMeasure({ measureBuild, measureWatch })();
+run.setupMeasure({ measureBuild, measureWatch, measureDevServer })();

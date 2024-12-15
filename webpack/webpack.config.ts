@@ -165,6 +165,9 @@ const developmentConfig = merge(commonConfig, {
                 errors: true,
             },
         },
+        devMiddleware: {
+            writeToDisk: true,
+        },
     },
 } as Configuration);
 
