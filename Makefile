@@ -66,7 +66,7 @@ sm-all: sm-build-all sm-watch-all sm-server-all
 	echo "🚀 done"
 
 sm-report: sm-all
-	eval 'npm run report'
+	eval 'npm run report -- --repeat=$$SM_REPEAT'
 
 clear-out:
 	rm -rf ./*/.build

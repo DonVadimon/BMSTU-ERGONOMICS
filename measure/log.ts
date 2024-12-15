@@ -107,7 +107,8 @@ const formatDevServerLaunch = (logs: CollectingLogs) => {
     const { meanRunTime } = logs;
 
     return [
-        [`4.4 Скорость запуска дев-сервера`, `- Среднее время за ${env.argv.repeat} запусков - ${meanRunTime} ms`],
+        `4.4 Скорость запуска дев-сервера`,
+        `- Среднее время за ${env.argv.repeat} запусков - ${meanRunTime} ms`,
     ].join('\n');
 };
 
