@@ -14,6 +14,12 @@
         "isolatedModules": true,
         "jsx": "react",
         "noImplicitAny": false,
-        "declaration": false
+        "declaration": false,
+        "noEmit": true
+    },
+    "ts-node": {
+        "compilerOptions": {
+            "module": "CommonJS"
+        }
     }
 }

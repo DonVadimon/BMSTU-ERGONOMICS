@@ -1,4 +1,4 @@
-SM_REPEAT = 1
+SM_REPEAT = 10
 export SM_REPEAT
 
 all:
@@ -64,6 +64,9 @@ sm-server-all: sm-server-wp sm-server-rp sm-server-pl
 
 sm-all: sm-build-all sm-watch-all sm-server-all
 	echo "🚀 done"
+
+sm-report: sm-all
+	eval 'npm run report'
 
 clear-out:
 	rm -rf ./*/.build
