@@ -38,7 +38,7 @@
     "json-server": "json-server --watch items.json",
     "start": "npx parcel serve public/index.html --dist-dir=.build --port=8000",
     "build": "rm -rf .build && npx parcel build public/index.html --dist-dir=.build",
-    "sm": "ts-node spead-measure.ts"
+    "sm": "ts-node speed-measure.ts"
   },
   "browserslist": {
     "production": [

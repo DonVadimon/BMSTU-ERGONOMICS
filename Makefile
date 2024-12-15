@@ -14,13 +14,13 @@ build-wp: # build webpack
 start-wp: # start webpack
 	cd webpack && npm run start
 
-sm-build-wp: sm-log # spead measure webpack build
+sm-build-wp: sm-log # speed measure webpack build
 	cd webpack && eval 'npm run sm -- --repeat=$$SM_REPEAT --measure=build'
 
-sm-watch-wp: sm-log # spead measure webpack watch
+sm-watch-wp: sm-log # speed measure webpack watch
 	cd webpack && eval 'npm run sm -- --repeat=$$SM_REPEAT --measure=watch'
 
-sm-server-wp: sm-log # spead measure webpack dev server
+sm-server-wp: sm-log # speed measure webpack dev server
 	cd webpack && eval 'npm run sm -- --repeat=$$SM_REPEAT --measure=server'
 
 build-rp: # build rollup
@@ -29,13 +29,13 @@ build-rp: # build rollup
 start-rp: # start rollup
 	cd rollup && npm run start
 
-sm-build-rp: sm-log # spead measure rollup build
+sm-build-rp: sm-log # speed measure rollup build
 	cd rollup && eval 'npm run sm -- --repeat=$$SM_REPEAT --measure=build'
 
-sm-watch-rp: sm-log # spead measure rollup watch
+sm-watch-rp: sm-log # speed measure rollup watch
 	cd rollup && eval 'npm run sm -- --repeat=$$SM_REPEAT --measure=watch'
 
-sm-server-rp: sm-log # spead measure rollup dev server
+sm-server-rp: sm-log # speed measure rollup dev server
 	cd rollup && eval 'npm run sm -- --repeat=$$SM_REPEAT --measure=server'
 
 build-pl: # build parcel
@@ -44,13 +44,13 @@ build-pl: # build parcel
 start-pl: # start parcel
 	cd parcel && npm run start
 
-sm-build-pl: sm-log # spead measure parcel build
+sm-build-pl: sm-log # speed measure parcel build
 	cd parcel && eval 'npm run sm -- --repeat=$$SM_REPEAT --measure=build'
 
-sm-watch-pl: sm-log # spead measure parcel watch
+sm-watch-pl: sm-log # speed measure parcel watch
 	cd parcel && eval 'npm run sm -- --repeat=$$SM_REPEAT --measure=watch'
 
-sm-server-pl: sm-log # spead measure parcel dev server
+sm-server-pl: sm-log # speed measure parcel dev server
 	cd parcel && eval 'npm run sm -- --repeat=$$SM_REPEAT --measure=server'
 
 sm-build-all: sm-build-wp sm-build-rp sm-build-pl

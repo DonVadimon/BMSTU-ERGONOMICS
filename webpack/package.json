@@ -63,7 +63,7 @@
     "json-server": "json-server --watch items.json",
     "start": "NODE_ENV=development webpack serve --config webpack.config.ts --progress",
     "build": "rm -rf .build && NODE_ENV=production webpack --config webpack.config.ts",
-    "sm": "ts-node spead-measure.ts"
+    "sm": "ts-node speed-measure.ts"
   },
   "browserslist": {
     "production": [
