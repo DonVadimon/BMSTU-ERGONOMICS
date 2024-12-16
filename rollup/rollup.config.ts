@@ -43,9 +43,13 @@ function makeHtmlPlugin() {
                 })
                 .join('\n');
 
-            const replaceValue = (template, key, value) => template.replace(`{{${key}}}`, value);
+            const replaceValue = (template: string, key: string, value: string) =>
+                template.replace(`{{${key}}}`, value);
 
-            return replaceValue(replaceValue(template, 'scripts', scripts), 'styles', styles);
+            return replaceValue(replaceValue(template, 'scripts', scripts), 'styles', styles).replace(
+                /(?:\r\n|\r|\n)/gm,
+                '',
+            );
         },
     });
 }
@@ -68,7 +72,7 @@ export default {
         format: 'iife',
     },
     plugins: [
-        commonjs(),
+        commonjs({ sourceMap: false }),
         nodeResolve({
             browser: true,
             preferBuiltins: true,
